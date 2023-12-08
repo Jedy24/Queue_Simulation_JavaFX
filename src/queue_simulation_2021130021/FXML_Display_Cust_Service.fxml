@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="queue_simulation_2021130021.FXML_Display_Cust_ServiceController">
+   <children>
+      <ImageView fitHeight="406.0" fitWidth="601.0" layoutY="-3.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/bg_display.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="44.0" layoutY="17.0" text="Data Customer Service" textFill="WHITE">
+         <font>
+            <Font name="Monotype Corsiva" size="36.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tbvcustservice" layoutX="47.0" layoutY="142.0" prefHeight="200.0" prefWidth="507.0">
+         <columns>
+            <TableColumn prefWidth="75.0" text="C1" />
+            <TableColumn prefWidth="75.0" text="C2" />
+         </columns>
+      </TableView>
+      <Button fx:id="btnclose" layoutX="503.0" layoutY="22.0" mnemonicParsing="false" onAction="#closeklik" prefHeight="36.0" prefWidth="39.0">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/close.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnawal" layoutX="352.0" layoutY="362.0" mnemonicParsing="false" onAction="#awalklik">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/beginning.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnsebelum" layoutX="408.0" layoutY="362.0" mnemonicParsing="false" onAction="#sebelumklik">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/prev.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnsetelah" layoutX="456.0" layoutY="362.0" mnemonicParsing="false" onAction="#setelahklik">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/next.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnakhir" layoutX="503.0" layoutY="362.0" mnemonicParsing="false" onAction="#akhirklik">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/last.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btntambah" layoutX="46.0" layoutY="362.0" mnemonicParsing="false" onAction="#tambahklik">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/add.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnhapus" layoutX="103.0" layoutY="362.0" mnemonicParsing="false" onAction="#hapusklik">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/delete.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnedit" layoutX="167.0" layoutY="362.0" mnemonicParsing="false" onAction="#editklik">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/edit.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TextField fx:id="txtcari" layoutX="47.0" layoutY="80.0" onKeyReleased="#cariData" prefHeight="39.0" prefWidth="507.0" promptText="Search..." />
+   </children>
+</AnchorPane>

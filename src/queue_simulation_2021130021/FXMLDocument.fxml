@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="244.0" prefWidth="521.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="queue_simulation_2021130021.FXMLDocumentController">
+   <children>
+      <ImageView fitHeight="69.0" fitWidth="522.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/bg_main_menu.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="75.0" layoutY="21.0" text="Queue Simulation Customer Service">
+         <font>
+            <Font name="Gill Sans MT" size="25.0" />
+         </font>
+      </Label>
+      <MenuBar layoutX="-1.0" layoutY="71.0" prefHeight="39.0" prefWidth="521.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Display Data">
+               <items>
+                  <MenuItem fx:id="DisplayCustService" mnemonicParsing="false" onAction="#DisplayCustServiceClick" text="Customer Service" />
+                  <MenuItem fx:id="DisplayCust" mnemonicParsing="false" onAction="#DisplayCustClick" text="Customer" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Entry Data">
+               <items>
+                  <MenuItem fx:id="InputCustService" mnemonicParsing="false" onAction="#InputCustServiceClick" text="Customer Service" />
+                  <MenuItem fx:id="InputCust" mnemonicParsing="false" onAction="#InputCustClick" text="Customer" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Queue">
+               <items>
+                  <MenuItem fx:id="displayqueue" mnemonicParsing="false" onAction="#displayqueueklik" text="Display Queue Data" />
+                  <MenuItem fx:id="simulation" mnemonicParsing="false" onAction="#simulationklik" text="Simulation" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>

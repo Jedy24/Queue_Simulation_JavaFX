@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="368.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="queue_simulation_2021130021.FXML_Input_CustController">
+   <children>
+      <ImageView fitHeight="375.0" fitWidth="420.0" layoutY="-2.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/bg_input.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btncancel" layoutX="220.0" layoutY="331.0" mnemonicParsing="false" onAction="#cancelklik" text="Cancel">
+         <font>
+            <Font name="Rockwell Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnsave" layoutX="147.0" layoutY="331.0" mnemonicParsing="false" onAction="#saveklik" text="Save">
+         <font>
+            <Font name="Rockwell Bold" size="12.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtumur" layoutX="91.0" layoutY="291.0" prefHeight="25.0" prefWidth="237.0" />
+      <TextField fx:id="txturut" layoutX="91.0" layoutY="166.0" prefHeight="25.0" prefWidth="237.0" />
+      <TextField fx:id="txtidcust" layoutX="91.0" layoutY="103.0" prefHeight="25.0" prefWidth="237.0" />
+      <Label layoutX="91.0" layoutY="262.0" text="Usia">
+         <font>
+            <Font name="Baskerville Old Face" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="91.0" layoutY="200.0" text="Nama">
+         <font>
+            <Font name="Baskerville Old Face" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="91.0" layoutY="137.0" text="No. Urut">
+         <font>
+            <Font name="Baskerville Old Face" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="91.0" layoutY="78.0" text="Id Customer">
+         <font>
+            <Font name="Baskerville Old Face" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnclose" layoutX="346.0" layoutY="32.0" mnemonicParsing="false" onAction="#closeklik">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/close.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="91.0" layoutY="24.0" text="Input Data Customer">
+         <font>
+            <Font name="Monotype Corsiva" size="31.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtnama" layoutX="91.0" layoutY="228.0" prefHeight="25.0" prefWidth="237.0" />
+   </children>
+</AnchorPane>
