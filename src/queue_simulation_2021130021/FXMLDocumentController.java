@@ -26,6 +26,7 @@ public class FXMLDocumentController implements Initializable {
     
     public static DB_Cust_Service dt_cust_service = new DB_Cust_Service();
     public static DB_Cust dt_cust = new DB_Cust();
+    public static DB_Layanan dt_layanan = new DB_Layanan();
     
     @FXML
     private MenuItem DisplayCustService;

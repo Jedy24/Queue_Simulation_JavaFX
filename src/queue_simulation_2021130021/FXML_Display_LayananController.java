@@ -6,11 +6,17 @@ package queue_simulation_2021130021;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -22,7 +28,7 @@ public class FXML_Display_LayananController implements Initializable {
     @FXML
     private Button btnclose;
     @FXML
-    private TableView<?> tbvlayanan;
+    private TableView<LayananModel> tbvlayanan;
     @FXML
     private Button btnakhir;
     @FXML
@@ -30,20 +36,51 @@ public class FXML_Display_LayananController implements Initializable {
     @FXML
     private Button btnsebelum;
     @FXML
-    private Button btnawal;
+    private Button btnawal; 
     @FXML
     private Button btnhapus;
     @FXML
     private TableView<?> tbvdetil;
+    @FXML
+    private TextField txtnolayanan;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        showdata();
+        tbvlayanan.getSelectionModel().selectFirst();
+        txtnolayanan.setText(tbvlayanan.getSelectionModel().getSelectedItem().getNolayanan());
     }    
-
+    
+    public void showdata(){
+        ObservableList<LayananModel> data=FXMLDocumentController.dt_layanan.Load();
+        if(data!=null){          
+            tbvlayanan.getColumns().clear();
+            tbvlayanan.getItems().clear();
+            
+            TableColumn col = new TableColumn("No. Layanan");
+            col.setCellValueFactory(new PropertyValueFactory<LayananModel, String>("nolayanan"));
+            tbvlayanan.getColumns().addAll(col);
+            
+            col=new TableColumn("Deskripsi Layanan");
+            col.setCellValueFactory(new PropertyValueFactory<LayananModel, String>("desclayanan"));
+            tbvlayanan.getColumns().addAll(col);
+            
+            col=new TableColumn("ID Customer");
+            col.setCellValueFactory(new PropertyValueFactory<LayananModel, String>("idCust"));
+            tbvlayanan.getColumns().addAll(col);
+            
+            tbvlayanan.setItems(data);
+                                              
+        }else {  
+            Alert a = new Alert(Alert.AlertType.ERROR,"Data kosong",ButtonType.OK);
+            a.showAndWait();
+            tbvlayanan.getScene().getWindow().hide();;
+        }                
+    }
+    
     @FXML
     private void akhirklik(ActionEvent event) {
     }

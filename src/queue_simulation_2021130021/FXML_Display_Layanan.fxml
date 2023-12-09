@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import com.gluonhq.charm.glisten.mvc.View?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="448.0" prefWidth="532.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="queue_simulation_2021130021.FXML_Display_LayananController">
+<AnchorPane id="AnchorPane" prefHeight="448.0" prefWidth="532.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="queue_simulation_2021130021.FXML_Display_LayananController">
    <children>
       <ImageView fitHeight="455.0" fitWidth="532.0" layoutY="-1.0" pickOnBounds="true">
          <image>
@@ -32,7 +32,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextField fx:id="txtnolayanan" layoutX="179.0" layoutY="75.0" prefHeight="25.0" prefWidth="179.0" promptText="Input nomor layanan...." />
       <Label layoutX="36.0" layoutY="79.0" text="Search No. Layanan :" textFill="WHITE">
          <font>
             <Font name="UD Digi Kyokasho NK-B" size="12.0" />
@@ -100,5 +99,7 @@
             <TableColumn prefWidth="75.0" text="C2" />
          </columns>
       </TableView>
+      <View />
+      <TextField fx:id="txtnolayanan" layoutX="177.0" layoutY="75.0" prefHeight="25.0" prefWidth="168.0" promptText="Input nomor layanan..." />
    </children>
 </AnchorPane>
