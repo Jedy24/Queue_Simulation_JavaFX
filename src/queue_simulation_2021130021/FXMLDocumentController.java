@@ -36,9 +36,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private MenuItem InputCust;
     @FXML
-    private MenuItem displayqueue;
-    @FXML
     private MenuItem simulation;
+    @FXML
+    private MenuItem displaylayanan;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -113,12 +113,26 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    @FXML
-    private void displayqueueklik(ActionEvent event) {
-    }
 
     @FXML
     private void simulationklik(ActionEvent event) {
+    }
+
+    @FXML
+    private void displayLayananKlik(ActionEvent event) {
+        try{
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXML_Display_Layanan.fxml"));    
+            Parent root = (Parent)loader.load();
+            Scene scene = new Scene(root);
+            Stage stg=new Stage();
+            stg.initModality(Modality.APPLICATION_MODAL);
+            stg.setResizable(false);
+            stg.setIconified(false);
+            stg.setScene(scene);
+            stg.show();        
+        } catch (IOException e){ 
+            e.printStackTrace();   
+        }
     }
     
 }

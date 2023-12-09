@@ -37,7 +37,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Queue">
                <items>
-                  <MenuItem fx:id="displayqueue" mnemonicParsing="false" onAction="#displayqueueklik" text="Display Queue Data" />
+                  <MenuItem fx:id="displaylayanan" mnemonicParsing="false" onAction="#displayLayananKlik" text="Display Data Layanan" />
                   <MenuItem fx:id="simulation" mnemonicParsing="false" onAction="#simulationklik" text="Simulation" />
                </items>
             </Menu>

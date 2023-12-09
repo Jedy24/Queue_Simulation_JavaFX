@@ -59,9 +59,9 @@ public class FXML_Display_Cust_ServiceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         showdata();
-    }    
+    }
 
-        public void showdata(){
+    public void showdata(){
         ObservableList<CustServiceModel> data=FXMLDocumentController.dt_cust_service.Load();
         if(data!=null){            
             tbvcustservice.getColumns().clear();            

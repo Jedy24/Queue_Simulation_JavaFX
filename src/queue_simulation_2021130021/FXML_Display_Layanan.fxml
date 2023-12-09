@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="448.0" prefWidth="532.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="queue_simulation_2021130021.FXML_Display_LayananController">
+   <children>
+      <ImageView fitHeight="455.0" fitWidth="532.0" layoutY="-1.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/bg_display.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="33.0" layoutY="26.0" text="Data Layanan" textFill="WHITE">
+         <font>
+            <Font name="Monotype Corsiva" size="34.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnclose" layoutX="449.0" layoutY="35.0" mnemonicParsing="false">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/close.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TextField fx:id="txtnolayanan" layoutX="179.0" layoutY="75.0" prefHeight="25.0" prefWidth="179.0" promptText="Input nomor layanan...." />
+      <Label layoutX="36.0" layoutY="79.0" text="Search No. Layanan :" textFill="WHITE">
+         <font>
+            <Font name="UD Digi Kyokasho NK-B" size="12.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tbvlayanan" layoutX="36.0" layoutY="111.0" prefHeight="111.0" prefWidth="465.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnakhir" layoutX="177.0" layoutY="230.0" mnemonicParsing="false" onAction="#akhirklik">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/last.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnsetelah" layoutX="129.0" layoutY="230.0" mnemonicParsing="false" onAction="#setelahklik">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/next.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnsebelum" layoutX="81.0" layoutY="230.0" mnemonicParsing="false" onAction="#sebelumklik">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/prev.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnawal" layoutX="36.0" layoutY="230.0" mnemonicParsing="false" onAction="#awalklik">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/beginning.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnhapus" layoutX="458.0" layoutY="230.0" mnemonicParsing="false" onAction="#hapusklik">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/delete.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="36.0" layoutY="278.0" text="Detil Layanan" textFill="WHITE">
+         <font>
+            <Font name="UD Digi Kyokasho NK-B" size="12.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tbvdetil" layoutX="34.0" layoutY="300.0" prefHeight="111.0" prefWidth="465.0">
+         <columns>
+            <TableColumn prefWidth="75.0" text="C1" />
+            <TableColumn prefWidth="75.0" text="C2" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

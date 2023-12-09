@@ -66,7 +66,7 @@ public class FXML_Input_Cust_ServiceController implements Initializable {
             
             Date tgllahir = d.getTgllahir();
             if (tgllahir != null) {
-                dtplahir.getEditor().setText(new SimpleDateFormat("yyyy-MM-dd").format(tgllahir));
+                dtplahir.setValue(tgllahir.toLocalDate());
             }
             
             txtumur.setText(String.valueOf(d.getUmur()));
