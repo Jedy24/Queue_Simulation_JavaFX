@@ -4,12 +4,15 @@
  */
 package queue_simulation_2021130021;
 
+import java.sql.Date;
+
 /**
  *
  * @author Jevon
  */
 public class LayananModel {
-    private String nolayanan, desclayanan, idCust;
+    private String nolayanan, idCustService;
+    private Date tanggal;
 
     public String getNolayanan() {
         return nolayanan;
@@ -19,21 +22,19 @@ public class LayananModel {
         this.nolayanan = nolayanan;
     }
 
-    public String getDesclayanan() {
-        return desclayanan;
+    public String getIdCustService() {
+        return idCustService;
     }
 
-    public void setDesclayanan(String desclayanan) {
-        this.desclayanan = desclayanan;
+    public void setIdCustService(String idCustService) {
+        this.idCustService = idCustService;
     }
 
-    public String getIdCust() {
-        return idCust;
+    public Date getTanggal() {
+        return tanggal;
     }
 
-    public void setIdCust(String idCust) {
-        this.idCust = idCust;
+    public void setTanggal(Date tanggal) {
+        this.tanggal = tanggal;
     }
-    
-    
 }

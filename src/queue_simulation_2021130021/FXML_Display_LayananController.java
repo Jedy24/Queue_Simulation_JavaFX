@@ -17,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -40,7 +41,7 @@ public class FXML_Display_LayananController implements Initializable {
     @FXML
     private Button btnhapus;
     @FXML
-    private TableView<?> tbvdetil;
+    private TableView<DetilModel> tbvdetil;
     @FXML
     private TextField txtnolayanan;
 
@@ -52,6 +53,7 @@ public class FXML_Display_LayananController implements Initializable {
         showdata();
         tbvlayanan.getSelectionModel().selectFirst();
         txtnolayanan.setText(tbvlayanan.getSelectionModel().getSelectedItem().getNolayanan());
+        showdatadetil();
     }    
     
     public void showdata(){
@@ -64,41 +66,115 @@ public class FXML_Display_LayananController implements Initializable {
             col.setCellValueFactory(new PropertyValueFactory<LayananModel, String>("nolayanan"));
             tbvlayanan.getColumns().addAll(col);
             
-            col=new TableColumn("Deskripsi Layanan");
-            col.setCellValueFactory(new PropertyValueFactory<LayananModel, String>("desclayanan"));
+            col = new TableColumn("ID Customer Service");
+            col.setCellValueFactory(new PropertyValueFactory<LayananModel, String>("idCustService"));
             tbvlayanan.getColumns().addAll(col);
             
-            col=new TableColumn("ID Customer");
-            col.setCellValueFactory(new PropertyValueFactory<LayananModel, String>("idCust"));
+            col = new TableColumn("Tanggal Layanan");
+            col.setCellValueFactory(new PropertyValueFactory<LayananModel, String>("tanggal"));
             tbvlayanan.getColumns().addAll(col);
             
             tbvlayanan.setItems(data);
                                               
-        }else {  
+        } else {  
             Alert a = new Alert(Alert.AlertType.ERROR,"Data kosong",ButtonType.OK);
             a.showAndWait();
             tbvlayanan.getScene().getWindow().hide();;
         }                
     }
     
+    public void showdatadetil(){
+        ObservableList<DetilModel> data = FXMLDocumentController.dt_detil.Load(txtnolayanan.getText());
+        if(data!=null){  
+            tbvdetil.getColumns().clear();
+            tbvdetil.getItems().clear();
+            
+            TableColumn col = new TableColumn("Nomor Layanan");
+            col.setCellValueFactory(new PropertyValueFactory<DetilModel, String>("nolayanan"));
+            tbvdetil.getColumns().addAll(col);
+            
+            col = new TableColumn("ID Customer");
+            col.setCellValueFactory(new PropertyValueFactory<DetilModel, String>("idCust"));
+            tbvdetil.getColumns().addAll(col);
+            
+            col = new TableColumn("Nama Customer");
+            col.setCellValueFactory(new PropertyValueFactory<DetilModel, String>("nama"));
+            tbvdetil.getColumns().addAll(col);
+            
+            col = new TableColumn("Deskripsi Layanan");
+            col.setCellValueFactory(new PropertyValueFactory<DetilModel, String>("desclayanan"));
+            tbvdetil.getColumns().addAll(col);
+
+            tbvdetil.setItems(data);
+                                            
+        } else {  
+            Alert a=new Alert(Alert.AlertType.ERROR,"Data kosong",ButtonType.OK);
+            a.showAndWait();
+            tbvdetil.getScene().getWindow().hide();
+        }   
+        tbvdetil.getSelectionModel().selectLast();
+    }
+    
     @FXML
     private void akhirklik(ActionEvent event) {
+        tbvlayanan.getSelectionModel().selectLast(); 
+        tbvlayanan.requestFocus();  
+        txtnolayanan.setText(tbvlayanan.getSelectionModel().getSelectedItem().getNolayanan());
+        showdatadetil();
     }
 
     @FXML
     private void setelahklik(ActionEvent event) {
+        tbvlayanan.getSelectionModel().selectBelowCell(); 
+        tbvlayanan.requestFocus();  
+        txtnolayanan.setText(tbvlayanan.getSelectionModel().getSelectedItem().getNolayanan());
+        showdatadetil();
     }
 
     @FXML
     private void sebelumklik(ActionEvent event) {
+        tbvlayanan.getSelectionModel().selectAboveCell(); 
+        tbvlayanan.requestFocus();  
+        txtnolayanan.setText(tbvlayanan.getSelectionModel().getSelectedItem().getNolayanan());
+        showdatadetil();
     }
 
     @FXML
     private void awalklik(ActionEvent event) {
+        tbvlayanan.getSelectionModel().selectFirst(); 
+        tbvlayanan.requestFocus();  
+        txtnolayanan.setText(tbvlayanan.getSelectionModel().getSelectedItem().getNolayanan());
+        showdatadetil();
     }
 
     @FXML
     private void hapusklik(ActionEvent event) {
+        Alert a=new Alert(Alert.AlertType.CONFIRMATION, "Data Layanan akan dihapus?", ButtonType.YES, ButtonType.NO);
+        a.showAndWait();
+        
+        if(a.getResult()==ButtonType.YES){
+            FXMLDocumentController.dt_detil.deleteall(txtnolayanan.getText());
+            FXMLDocumentController.dt_layanan.delete(txtnolayanan.getText());
+                      
+            Alert b=new Alert(Alert.AlertType.INFORMATION, "Data Layanan berhasil dihapus", ButtonType.OK);
+            b.showAndWait();
+            } else {
+                Alert b=new Alert(Alert.AlertType.ERROR, "Data Layanan gagal dihapus", ButtonType.OK);
+                b.showAndWait();               
+            }    
+        showdata();
+        showdatadetil(); 
+    }
+
+    @FXML
+    private void klikdata(MouseEvent event) {
+        txtnolayanan.setText(tbvlayanan.getSelectionModel().getSelectedItem().getNolayanan());
+        showdatadetil();
+    }
+
+    @FXML
+    private void closeklik(ActionEvent event) {
+        btnclose.getScene().getWindow().hide();
     }
     
 }

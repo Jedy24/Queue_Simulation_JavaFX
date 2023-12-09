@@ -27,6 +27,7 @@ public class FXMLDocumentController implements Initializable {
     public static DB_Cust_Service dt_cust_service = new DB_Cust_Service();
     public static DB_Cust dt_cust = new DB_Cust();
     public static DB_Layanan dt_layanan = new DB_Layanan();
+    public static DB_Detil dt_detil = new DB_Detil();
     
     @FXML
     private MenuItem DisplayCustService;
@@ -122,7 +123,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void displayLayananKlik(ActionEvent event) {
         try{
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXML_Display_Layanan.fxml"));    
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_Display_Layanan.fxml"));    
             Parent root = (Parent)loader.load();
             Scene scene = new Scene(root);
             Stage stg=new Stage();

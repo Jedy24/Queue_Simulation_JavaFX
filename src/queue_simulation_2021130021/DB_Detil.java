@@ -6,7 +6,6 @@ package queue_simulation_2021130021;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -14,30 +13,31 @@ import javafx.collections.ObservableList;
  *
  * @author Jevon
  */
-public class DB_Layanan {
-    private LayananModel dt = new LayananModel();
-    public LayananModel getLayananModel(){
+public class DB_Detil {
+    private DetilModel dt = new DetilModel();
+    public DetilModel getDetilModel(){
         return (dt);
     }
-    public void setLayananModel(LayananModel s){
+    public void setDetilModel(DetilModel s){
         dt = s;
     }
     
-    public ObservableList<LayananModel>  Load() {
+    public ObservableList<DetilModel> Load(String kode) {     
         try {
-            ObservableList<LayananModel> tableData = FXCollections.observableArrayList();
+            ObservableList<DetilModel> tableData = FXCollections.observableArrayList();
             Koneksi con = new Koneksi();            
             con.bukaKoneksi();
             con.statement = con.dbKoneksi.createStatement();
-            ResultSet rs = con.statement.executeQuery("Select nolayanan, idCustService, tanggal from layanan");
-            
-            int i = 1;
+            ResultSet rs = con.statement.executeQuery("Select d.nolayanan, d.desclayanan, c.idCust, c.nama " + 
+                    "from detillayanan d join customer c on(d.idCust = c.idCust) WHERE nolayanan LIKE '" + kode + "'");
+            int i = 1;               
             while (rs.next()) {
-                LayananModel d = new LayananModel();
-                d.setNolayanan(rs.getString("nolayanan"));
-                d.setIdCustService(rs.getString("idCustService"));
-                d.setTanggal(rs.getDate("tanggal"));
-
+                DetilModel d=new DetilModel();
+                d.setNolayanan(rs.getString("nolayanan"));                
+                d.setIdCust(rs.getString("idCust"));
+                d.setNama(rs.getString("nama"));
+                d.setDesclayanan(rs.getString("desclayanan"));  
+                
                 tableData.add(d);                
                 i++;            
             }
@@ -48,33 +48,16 @@ public class DB_Layanan {
             return null;        
         }
     }
-    
+
     public int validasi(String nomor) {
         int val = 0;
         try {         
             Koneksi con = new Koneksi();            
             con.bukaKoneksi();
             con.statement = con.dbKoneksi.createStatement();
-            ResultSet rs = con.statement.executeQuery("select count(*) as jml from layanan where nolayanan = '" + nomor + "'");
+            ResultSet rs = con.statement.executeQuery("select count(*) as jml from detillayanan where nolayanan = '" + nomor + "'");
             while (rs.next()) {                
                 val = rs.getInt("jml");            
-            }            
-            con.tutupKoneksi();
-        } catch (SQLException e) {            
-            e.printStackTrace();        
-        }
-        return val;
-    }
-    
-    public int cariMax() {
-        int val = 0;
-        try {         
-            Koneksi con = new Koneksi();            
-            con.bukaKoneksi();
-            con.statement = con.dbKoneksi.createStatement();
-            ResultSet rs = con.statement.executeQuery("select max(nolayanan) as nomax from layanan");
-            while (rs.next()) {                
-                val = rs.getInt("nomax");            
             }            
             con.tutupKoneksi();
         } catch (SQLException e) {            
@@ -88,10 +71,10 @@ public class DB_Layanan {
         Koneksi con = new Koneksi();
         try {       
             con.bukaKoneksi();
-            con.preparedStatement = con.dbKoneksi.prepareStatement("insert into layanan (nolayanan, idCustService, tanggal) values (?,?,?)");
-            con.preparedStatement.setString(1, getLayananModel().getNolayanan());           
-            con.preparedStatement.setString(2, getLayananModel().getIdCustService());
-            con.preparedStatement.setDate(3, getLayananModel().getTanggal());            
+            con.preparedStatement = con.dbKoneksi.prepareStatement("insert into detillayanan (nolayanan, idCust, desclayanan) values (?,?,?)");
+            con.preparedStatement.setString(1, getDetilModel().getNolayanan());           
+            con.preparedStatement.setString(2, getDetilModel().getIdCust());
+            con.preparedStatement.setString(3, getDetilModel().getDesclayanan());            
             con.preparedStatement.executeUpdate();
             berhasil = true;
         } catch (Exception e) {            
@@ -103,12 +86,30 @@ public class DB_Layanan {
         }    
     }
     
-    public boolean delete(String nomor) {
+    public boolean delete(String nomor, String kode) {
         boolean berhasil = false;        
         Koneksi con = new Koneksi();
         try {            
             con.bukaKoneksi();;
-            con.preparedStatement = con.dbKoneksi.prepareStatement("delete from layanan where nolayanan = ? ");
+            con.preparedStatement = con.dbKoneksi.prepareStatement("delete from detillayanan where nolayanan  = ? and idCust = ?");
+            con.preparedStatement.setString(1, nomor);
+            con.preparedStatement.setString(2, kode);
+            con.preparedStatement.executeUpdate();            
+            berhasil = true;
+        } catch (Exception e) {            
+            e.printStackTrace();
+        } finally {            
+            con.tutupKoneksi();            
+            return berhasil;        
+        }
+    }
+    
+    public boolean deleteall(String nomor) {
+        boolean berhasil = false;        
+        Koneksi con = new Koneksi();
+        try {            
+            con.bukaKoneksi();;
+            con.preparedStatement = con.dbKoneksi.prepareStatement("delete from detillayanan where nolayanan  = ?");
             con.preparedStatement.setString(1, nomor);
             con.preparedStatement.executeUpdate();            
             berhasil = true;
@@ -125,10 +126,10 @@ public class DB_Layanan {
         Koneksi con = new Koneksi();
         try {            
             con.bukaKoneksi();
-            con.preparedStatement = con.dbKoneksi.prepareStatement("update layanan set idCustService = ?, tanggal = ?  where  nolayanan = ? ");
-            con.preparedStatement.setString(1, getLayananModel().getIdCustService());
-            con.preparedStatement.setDate(2, getLayananModel().getTanggal());
-            con.preparedStatement.setString(3, getLayananModel().getNolayanan());
+            con.preparedStatement = con.dbKoneksi.prepareStatement("update detillayanan set idCust = ?, desclayanan = ?  where  nolayanan = ? ");
+            con.preparedStatement.setString(1, getDetilModel().getIdCust());
+            con.preparedStatement.setString(2, getDetilModel().getDesclayanan());
+            con.preparedStatement.setString(3, getDetilModel().getNolayanan());
             con.preparedStatement.executeUpdate();            
             berhasil = true;
         } catch (Exception e) {            
