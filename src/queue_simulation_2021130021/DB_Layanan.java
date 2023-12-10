@@ -7,6 +7,7 @@ package queue_simulation_2021130021;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,15 +16,16 @@ import javafx.collections.ObservableList;
  * @author Jevon
  */
 public class DB_Layanan {
-    private LayananModel dt = new LayananModel();
-    public LayananModel getLayananModel(){
-        return (dt);
-    }
-    public void setLayananModel(LayananModel s){
-        dt = s;
-    }
+    private LayananModel dt = new LayananModel();   
+    private HashMap<String, DetilModel> dt2 = new HashMap<String, DetilModel>();
     
-    public ObservableList<LayananModel>  Load() {
+    public LayananModel getLayananModel(){ return(dt);}
+    public void setLayananModel(LayananModel s){ dt=s;}
+    
+    public HashMap<String, DetilModel> getDetilModel(){ return(dt2);}
+    public void setDetilModel(DetilModel d){ dt2.put(d.getNolayanan(), d);}
+    
+    public ObservableList<LayananModel> Load() {
         try {
             ObservableList<LayananModel> tableData = FXCollections.observableArrayList();
             Koneksi con = new Koneksi();            
@@ -138,5 +140,63 @@ public class DB_Layanan {
             con.tutupKoneksi();            
             return berhasil;        
         }    
+    }
+    
+    public String autonum(String tahun){         
+        String tmp = "";
+        try {          
+            Koneksi con = new Koneksi();            
+            con.bukaKoneksi();
+            con.statement = con.dbKoneksi.createStatement();
+            ResultSet rs = con.statement.executeQuery("select max(nolayanan) as n from layanan where nolayanan like '"+tahun+"%'");
+            while (rs.next()) {              
+                tmp = tahun + String.format("%03d", Integer.parseInt(rs.getString("n").substring(4))+1);            		}
+                con.tutupKoneksi();
+                return tmp;
+            } 
+            catch (Exception e) {            
+                e.printStackTrace();            
+                return tmp;        
+            }    
+    }
+    
+    public boolean saveall() {
+        boolean berhasil = false;
+        Koneksi con = new Koneksi();
+        try {
+            con.bukaKoneksi();
+            con.dbKoneksi.setAutoCommit(false);
+            
+            con.preparedStatement = con.dbKoneksi.prepareStatement("delete from layanan where nolayanan = ?");
+            con.preparedStatement.setString(1, getLayananModel().getNolayanan());
+            con.preparedStatement.executeUpdate();
+            
+            con.preparedStatement = con.dbKoneksi.prepareStatement("insert into layanan (nolayanan, idCustService , tanggal) values (?,?,?)");
+            con.preparedStatement.setString(1, getLayananModel().getNolayanan());
+            con.preparedStatement.setString(2, getLayananModel().getIdCustService());
+            con.preparedStatement.setDate(3, getLayananModel().getTanggal());
+            con.preparedStatement.executeUpdate();
+            
+            con.preparedStatement = con.dbKoneksi.prepareStatement("delete from detillayanan where nolayanan = ?");
+            con.preparedStatement.setString(1, getLayananModel().getNolayanan());
+            con.preparedStatement.executeUpdate();
+            
+            for(DetilModel sm:dt2.values()){
+               con.preparedStatement = con.dbKoneksi.prepareStatement("insert into detillayanan (nolayanan, idCust, desclayanan) values (?,?,?)");
+               con.preparedStatement.setString(1, sm.getNolayanan());
+               con.preparedStatement.setString(2, sm.getIdCust());
+               con.preparedStatement.setString(3, sm.getDesclayanan());
+               con.preparedStatement.executeUpdate();
+            }
+            
+            con.dbKoneksi.commit();
+            berhasil = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            berhasil = false;
+        } finally {
+            con.tutupKoneksi();
+            return berhasil;
+        }
     }
 }

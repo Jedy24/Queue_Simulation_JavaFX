@@ -42,6 +42,5 @@ public class DetilModel {
 
     public void setDesclayanan(String desclayanan) {
         this.desclayanan = desclayanan;
-    }
-       
+    }  
 }
