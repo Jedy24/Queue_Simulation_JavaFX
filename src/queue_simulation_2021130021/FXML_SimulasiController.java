@@ -113,8 +113,8 @@ public class FXML_SimulasiController implements Initializable {
             @Override
             public void run(){
                 Platform.runLater(() -> {
-                   int p = acak.nextInt(listcust.getItems().size());
-                   int b = acak.nextInt(listcustservice.getItems().size());
+                   int p = acak.nextInt(custSize);
+                   int b = acak.nextInt(serviceSize);
                    String desc = generateRandomString(10);
 
                    LayananModel j = new LayananModel();
