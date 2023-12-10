@@ -79,7 +79,7 @@ public class FXML_SimulasiController implements Initializable {
             txareahasil.getScene().getWindow().hide();
         } else {
             for (int i = 0; i < data.size(); i++) {
-                listcust.getItems().addAll(data.get(i).getIdCust() + " - " + data.get(i).getNama());
+                listcust.getItems().addAll(data.get(i).getIdCust() + " - " + data.get(i).getNoUrut() + " - " + data.get(i).getNama());
             }
             ObservableList<CustServiceModel> data2 = FXMLDocumentController.dt_cust_service.Load();
             if (data.isEmpty()) {
@@ -112,12 +112,12 @@ public class FXML_SimulasiController implements Initializable {
 
                    LayananModel j = new LayananModel();
                    j.setNolayanan(FXMLDocumentController.dt_layanan.autonum(sdf.format(new java.util.Date())) );        
-                   j.setIdCustService(listcust.getItems().get(p).substring(0, 6));
+                   j.setIdCustService(listcustservice.getItems().get(p).substring(0, 6));
                    j.setTanggal(Date.valueOf(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
 
                    DetilModel s = new DetilModel();        
                    s.setNolayanan(j.getNolayanan());
-                   s.setIdCust(listcustservice.getItems().get(b).substring(0, 6));        
+                   s.setIdCust(listcust.getItems().get(b).substring(0, 6));        
                    s.setDesclayanan(desc);
                    
                    FXMLDocumentController.dt_layanan.setLayananModel(j);
@@ -126,7 +126,7 @@ public class FXML_SimulasiController implements Initializable {
                       txareahasil.setText(txareahasil.getText()+
                       j.getNolayanan()+" - "+ listcust.getItems().get(p)+" : "+
                       listcustservice.getItems().get(b)+" "+String.format("%s\n", desc));
-//                      txareahasil.setScrollTop(Double.MAX_VALUE);        
+                      txareahasil.setScrollTop(Double.MAX_VALUE);        
                    }
              });
             }        

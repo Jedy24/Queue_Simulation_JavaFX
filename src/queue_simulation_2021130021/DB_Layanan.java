@@ -150,7 +150,7 @@ public class DB_Layanan {
             con.statement = con.dbKoneksi.createStatement();
             ResultSet rs = con.statement.executeQuery("select max(nolayanan) as n from layanan where nolayanan like '"+tahun+"%'");
             while (rs.next()) {              
-                tmp = tahun + String.format("%03d", Integer.parseInt(rs.getString("n").substring(4))+1);            		}
+                tmp = tahun + String.format("%02d", Integer.parseInt(rs.getString("n").substring(4))+1);            		}
                 con.tutupKoneksi();
                 return tmp;
             } 
