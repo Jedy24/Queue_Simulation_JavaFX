@@ -101,7 +101,14 @@ public class FXML_SimulasiController implements Initializable {
 
     @FXML
     private void simulasiklik(ActionEvent event) {
-        int wkt = Integer.parseInt(txtwaktu.getText());        
+        int wkt = Integer.parseInt(txtwaktu.getText());
+        int custSize = listcust.getItems().size();
+        int serviceSize = listcustservice.getItems().size();
+        
+        if (custSize == 0 || serviceSize == 0) {
+            return;
+        }
+        
         t.scheduleAtFixedRate(new TimerTask(){           
             @Override
             public void run(){
