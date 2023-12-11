@@ -41,6 +41,13 @@
                   <MenuItem fx:id="simulation" mnemonicParsing="false" onAction="#simulationklik" text="Simulation" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Report">
+              <items>
+                <MenuItem fx:id="reportcust" mnemonicParsing="false" onAction="#reportcustklik" text="Report Customer" />
+                  <MenuItem fx:id="reportcustservice" mnemonicParsing="false" onAction="#reportcustserviceklik" text="Report Customer Service" />
+                  <MenuItem fx:id="reportlayanan" mnemonicParsing="false" onAction="#reportlayananklik" text="Report Layanan" />
+              </items>
+            </Menu>
          </menus>
       </MenuBar>
    </children>

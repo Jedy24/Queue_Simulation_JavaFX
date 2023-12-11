@@ -7,8 +7,13 @@ package queue_simulation_2021130021;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -159,5 +164,20 @@ public class DB_Cust_Service {
             con.tutupKoneksi();            
             return berhasil;        
         }    
-    }   
+    }
+    
+    public void CetakReportCustService(){
+        Koneksi con = new Koneksi();        
+        String is = "./src/queue_simulation_2021130021/ReportCustService.jasper";   
+        Map map = new HashMap(); 
+        map.put("judul", "Report Data Customer Service");
+        con.bukaKoneksi();        
+        try{
+           JasperPrint jasperPrint = JasperFillManager.fillReport(is, map,  con.dbKoneksi);
+           JasperViewer.viewReport(jasperPrint, false);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        } con.tutupKoneksi();    
+    }
 }

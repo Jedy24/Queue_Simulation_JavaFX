@@ -41,6 +41,12 @@ public class FXMLDocumentController implements Initializable {
     private MenuItem simulation;
     @FXML
     private MenuItem displaylayanan;
+    @FXML
+    private MenuItem reportcust;
+    @FXML
+    private MenuItem reportcustservice;
+    @FXML
+    private MenuItem reportlayanan;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -149,4 +155,18 @@ public class FXMLDocumentController implements Initializable {
             e.printStackTrace();   
         }
     }  
+
+    @FXML
+    private void reportcustklik(ActionEvent event) {
+        dt_cust.CetakReportCust();
+    }
+
+    @FXML
+    private void reportcustserviceklik(ActionEvent event) {
+        dt_cust_service.CetakReportCustService();
+    }
+
+    @FXML
+    private void reportlayananklik(ActionEvent event) {
+    }
 }
