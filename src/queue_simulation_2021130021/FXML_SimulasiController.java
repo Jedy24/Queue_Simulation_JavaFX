@@ -9,6 +9,8 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -53,19 +55,13 @@ public class FXML_SimulasiController implements Initializable {
     Timer t = new Timer();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
     
-    private String generateRandomString(int length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; //Inisialisasi character
-        Random random = new Random();
-        StringBuilder sb = new StringBuilder(length);
+    //Data dummy untuk generate deskripsi layanan
+    private final String[] descLayanan = {
+        "Informasi Rekening", "Bantuan Transaksi", "Klaim Kartu",
+        "Pengaduan dan Masukan", "Edukasi Keuangan", "Bantuan Pinjaman dan Kredit",
+        "Bantuan Nasabah Khusus", "Pengaduan Keamanan", "Informasi Layanan"
+    };
 
-        for (int i = 0; i < length; i++) {
-            char randomChar = characters.charAt(random.nextInt(characters.length()));
-            sb.append(randomChar);
-        }
-        return sb.toString();
-    }
-
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         txareahasil.setWrapText(true);
@@ -109,33 +105,55 @@ public class FXML_SimulasiController implements Initializable {
             return;
         }
         
+        Queue<String> customerQueue = new LinkedList<>();
+        
+        //Mengurutkan data customer berdasarkan nomor antrean.
+        ObservableList<String> sortCustomers = listcust.getItems().sorted((s1, s2) -> {
+            int queueNumber1 = Integer.parseInt(s1.split(" - ")[1]);
+            int queueNumber2 = Integer.parseInt(s2.split(" - ")[1]);
+            return Integer.compare(queueNumber1, queueNumber2);
+        });
+        
+        //Inisialisasi queue customer dengan data yang telah diurutkan
+        for (int i = 0; i < custSize; i++) {
+            customerQueue.offer(sortCustomers.get(i));
+        }
+        
         t.scheduleAtFixedRate(new TimerTask(){           
             @Override
             public void run(){
                 Platform.runLater(() -> {
-                   int p = acak.nextInt(custSize);
-                   int b = acak.nextInt(serviceSize);
-                   String desc = generateRandomString(10);
+                    if (!customerQueue.isEmpty()) {
+                        String customerInfo = customerQueue.poll();
+                        int b = acak.nextInt(serviceSize);
+                        String desc = descLayanan[acak.nextInt(descLayanan.length)];
 
-                   LayananModel j = new LayananModel();
-                   j.setNolayanan(FXMLDocumentController.dt_layanan.autonum(sdf.format(new java.util.Date())) );        
-                   j.setIdCustService(listcustservice.getItems().get(p).substring(0, 6));
-                   j.setTanggal(Date.valueOf(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+                        LayananModel j = new LayananModel();
+                        j.setNolayanan(FXMLDocumentController.dt_layanan.autonum(sdf.format(new java.util.Date())) );        
+                        j.setIdCustService(listcustservice.getItems().get(b).substring(0, 6));
+                        j.setTanggal(Date.valueOf(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
 
-                   DetilModel s = new DetilModel();        
-                   s.setNolayanan(j.getNolayanan());
-                   s.setIdCust(listcust.getItems().get(b).substring(0, 6));        
-                   s.setDesclayanan(desc);
-                   
-                   FXMLDocumentController.dt_layanan.setLayananModel(j);
-                   FXMLDocumentController.dt_layanan.setDetilModel(s);
-                   if(FXMLDocumentController.dt_layanan.saveall()){
-                      txareahasil.setText(txareahasil.getText()+
-                      j.getNolayanan()+" - "+ listcust.getItems().get(p)+" : "+
-                      listcustservice.getItems().get(b)+" "+String.format("%s\n", desc));
-                      txareahasil.setScrollTop(Double.MAX_VALUE);        
-                   }
-             });
+                        DetilModel s = new DetilModel();        
+                        s.setNolayanan(j.getNolayanan());
+                        
+                        //Mengambil detil dari data customer dari string customerInfo
+                        String[] customerDetails = customerInfo.split(" - ");
+                        s.setIdCust(customerDetails[0]);      
+                        
+                        s.setDesclayanan(desc);
+
+                        FXMLDocumentController.dt_layanan.setLayananModel(j);
+                        FXMLDocumentController.dt_layanan.setDetilModel(s);
+                        if(FXMLDocumentController.dt_layanan.saveall()){
+                           txareahasil.setText(txareahasil.getText() +
+                           j.getNolayanan()+" - "+ customerInfo +" : "+
+                           listcustservice.getItems().get(b)+" - Desc: "+String.format("%s\n", desc));
+                           txareahasil.setScrollTop(Double.MAX_VALUE);        
+                        }
+                    } else{
+                        t.cancel();
+                    }
+                });
             }        
         }, 0, 60000*wkt);   
     }
