@@ -8,8 +8,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -198,5 +202,20 @@ public class DB_Layanan {
             con.tutupKoneksi();
             return berhasil;
         }
+    }
+    
+    public void CetakReportLayanan(){
+        Koneksi con = new Koneksi();        
+        String is = "./src/queue_simulation_2021130021/Report_Layanan_Master.jasper";   
+        Map map = new HashMap(); 
+        map.put("judul", "Report Data Layanan Customer Service");
+        con.bukaKoneksi();        
+        try{
+           JasperPrint jasperPrint = JasperFillManager.fillReport(is, map,  con.dbKoneksi);
+           JasperViewer.viewReport(jasperPrint, false);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        } con.tutupKoneksi();    
     }
 }

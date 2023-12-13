@@ -168,5 +168,6 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void reportlayananklik(ActionEvent event) {
+        dt_layanan.CetakReportLayanan();
     }
 }

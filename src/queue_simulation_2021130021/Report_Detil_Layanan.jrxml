@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="144b84d9-8b2b-4488-9fe3-e0ac09895726">
+	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="prmdetil" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{nolayanan}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT d.nolayanan, d.idCust, d.desclayanan, c.nama, c.nourut
+FROM detillayanan d
+INNER JOIN customer c ON(d.idCust = c.idCust)
+
+WHERE nolayanan = $P{prmdetil};]]>
+	</queryString>
+	<field name="nolayanan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idCust" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desclayanan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nourut" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<rectangle>
+				<reportElement x="9" y="39" width="525" height="32" forecolor="#FFFFFF" backcolor="#FF9999" uuid="c907227a-8982-430c-b2b5-f4a0a5f5a6d9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="15" y="48" width="100" height="20" uuid="237bfbc4-47a8-420d-8503-d6fe4e6089b3"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nomor Layanan :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="125" y="48" width="100" height="20" uuid="a4b90c08-eb8f-46b7-9256-234929c86218"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nolayanan}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="15" y="9" width="100" height="20" uuid="ae17166e-363c-40f1-bd6d-004de4fa20a8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID Customer]]></text>
+			</staticText>
+			<line>
+				<reportElement x="15" y="32" width="519" height="1" uuid="e849bbda-d692-40cd-a29a-16bb4b233257"/>
+			</line>
+			<staticText>
+				<reportElement x="125" y="9" width="100" height="20" uuid="47794538-91a2-413a-bf70-bc1ad197a59e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="238" y="9" width="100" height="20" uuid="27f89c11-4adc-49a8-a843-c888e92a2ce4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nomor Urut]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="351" y="9" width="183" height="20" uuid="72c8c2ba-3b39-4346-ab12-e7a5ff5ae0a3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deskripsi Layanan]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement x="15" y="8" width="100" height="20" uuid="61c00533-f5aa-464d-992e-e58a0dc76819"/>
+				<textFieldExpression><![CDATA[$F{idCust}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="8" width="100" height="20" uuid="79682793-76ad-43a2-bafa-44507fc35b9c"/>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="238" y="8" width="100" height="20" uuid="3699f572-1065-4557-9b26-43d2033bf8c0"/>
+				<textFieldExpression><![CDATA[$F{nourut}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="8" width="183" height="35" uuid="c53e5941-86f1-4bc8-a37e-a662638bea9a"/>
+				<textFieldExpression><![CDATA[$F{desclayanan}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="5" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="5" splitType="Stretch"/>
+	</summary>
+</jasperReport>
