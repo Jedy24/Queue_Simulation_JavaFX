@@ -29,15 +29,15 @@ Program memiliki 4 fungsi utama yaitu menampilkan data master, melakukan input d
 * desclayanan TEXT
 -------------------------------
 ### Menampilkan Data Master
-Pengguna dapat menjalankan program untuk menampilkan data customer dan customer service.
+>Pengguna dapat menjalankan program untuk menampilkan data customer dan customer service.
 -------------------------------
 ### Input Data
-Pengguna dapat menjalankan program untuk melakukan input data customer dan customer service.
+>Pengguna dapat menjalankan program untuk melakukan input data customer dan customer service.
 -------------------------------
 ### Simulasi Antrean
-Simulasi antrean menggunakan algoritma queue dengan data diurutkan terlebih dahulu sesuai atribut nomor urut pada customer. <br>
+>Simulasi antrean menggunakan algoritma queue dengan data diurutkan terlebih dahulu sesuai atribut nomor urut pada customer. <br>
 Secara umum data diurutkan ascending menurut nomor urut sehingga customer yang memiliki nomor yang lebih kecil akan dilayani oleh customer service terlebih dahulu.
 -------------------------------
 ### Menampilkan Laporan
-Pengguna dapat menjalankan program untuk menampilkan data laporan customer, customer service, dan layanan customer service.
+>Pengguna dapat menjalankan program untuk menampilkan data laporan customer, customer service, dan layanan customer service.
 
