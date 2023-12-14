@@ -35,8 +35,9 @@ Program memiliki 4 fungsi utama yaitu menampilkan data master, melakukan input d
 >Pengguna dapat menjalankan program untuk melakukan input data customer dan customer service.
 -------------------------------
 ### Simulasi Antrean
->Simulasi antrean menggunakan algoritma queue dengan data diurutkan terlebih dahulu sesuai atribut nomor urut pada customer. <br>
-Secara umum data diurutkan ascending menurut nomor urut sehingga customer yang memiliki nomor yang lebih kecil akan dilayani oleh customer service terlebih dahulu.
+>Simulasi antrean menggunakan algoritma queue dengan data diurutkan terlebih dahulu sesuai atribut nomor urut pada customer. <br><br>
+Secara umum data diurutkan ascending menurut nomor urut sehingga customer yang memiliki nomor yang lebih kecil akan dilayani oleh customer service terlebih dahulu. <br><br>
+Customer service akan dipilih otomatis secara random dan deskripsi layanan akan dirandom sesuai string yang telah ditentukan dalam array ["Informasi Rekening", "Bantuan Transaksi", "Klaim Kartu", "Pengaduan dan Masukan", "Edukasi Keuangan", "Bantuan Pinjaman dan Kredit", "Bantuan Nasabah Khusus", "Pengaduan Keamanan", "Informasi Layanan" ]
 -------------------------------
 ### Menampilkan Laporan
 >Pengguna dapat menjalankan program untuk menampilkan data laporan customer, customer service, dan layanan customer service.
